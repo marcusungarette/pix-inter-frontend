@@ -1,6 +1,11 @@
+import { Wrapper, Background } from './signin-styles'
+import background from '../../assets/images/background-login.jpg'
+
 const SignIn = () => {
   return (
-    <div>SignIn</div>
+    <Wrapper>
+      <Background image={background} />
+    </Wrapper>
   )
 }
 export default SignIn
