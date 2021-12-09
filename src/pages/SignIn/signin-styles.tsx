@@ -19,3 +19,27 @@ export const Background = styled.div<{image: any}>`
     background-size: contain;
     z-index: 1;
 `
+export const InputContainer = styled.div`
+   margin-top: 67px;
+   width: 90%;
+   flex: 1;
+`
+
+export const ButtonContainer = styled.div`
+   width: 90%;
+   margin-top: 20px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+
+   p{
+       font-size: 0.75rem;
+       font-weight: 400;
+       color: ${({ theme }) => theme.colors.secondary};
+
+      a {
+       font-size: 1rem;
+       font-weight: 700;
+      }
+   }
+`
