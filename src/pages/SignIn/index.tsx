@@ -3,6 +3,7 @@ import background from '../../assets/images/background-login.jpg'
 import logoInter from '../../assets/images/Inter-orange.png'
 
 import Card from '../../components/Card'
+import Input from 'components/Input'
 
 const SignIn = () => {
   return (
@@ -13,8 +14,8 @@ const SignIn = () => {
         <img src={logoInter} width={172} height={61} alt='logo inter' />
 
         <InputContainer>
-          <h2>email</h2>
-          <p>senha</p>
+          <Input placeholder='EMAIL' />
+          <Input placeholder='SENHA' type='password' />
         </InputContainer>
 
         <ButtonContainer>
