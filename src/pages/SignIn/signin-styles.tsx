@@ -32,7 +32,7 @@ export const ButtonContainer = styled.div`
    align-items: center;
    flex-direction: column;
 
-   p{
+   p {
        font-size: 0.75rem;
        font-weight: 400;
        padding-bottom: 10px;
