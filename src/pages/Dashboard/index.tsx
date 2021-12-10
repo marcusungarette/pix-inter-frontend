@@ -1,6 +1,12 @@
+import { DashboardBackground } from './dashboard.styles'
+
+import Header from '../../components/Header'
+
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <DashboardBackground>
+      <Header />
+    </DashboardBackground>
   )
 }
 export default Dashboard
