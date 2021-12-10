@@ -2,6 +2,7 @@ import { HeaderContainer, HeaderWrapper, UserInfo } from './header-styles'
 
 import logoInter from '../../assets/images/Inter-orange.png'
 import { useNavigate } from 'react-router-dom'
+import UserCircle from 'components/UserCircle'
 
 const Header = () => {
   const navigate = useNavigate()
@@ -14,6 +15,7 @@ const Header = () => {
       <HeaderWrapper>
         <img src={logoInter} width={172} height={61} alt='logo inter' />
         <UserInfo>
+          <UserCircle initials='MU' />
           <div>
             <p>Olá, <span className='primary-color font-bold'>Marcus</span></p>
             <strong>22001123-1</strong><br />
