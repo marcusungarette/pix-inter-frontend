@@ -2,6 +2,7 @@ import { CardContainer } from './card-styles'
 
 interface CardProps {
     width?: string,
+    // eslint-disable-next-line no-undef
     children?: React.ReactNode;
     height?: string,
     noShadow?: boolean
