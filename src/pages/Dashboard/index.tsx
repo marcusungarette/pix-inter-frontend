@@ -2,6 +2,8 @@ import { DashboardBackground, BodyContainer, InlineTitle, InlineContainer } from
 
 import Header from '../../components/Header'
 import Card from 'components/Card'
+import Input from 'components/Input'
+import Button from 'components/Button'
 
 const Dashboard = () => {
   const wallet = 5000
@@ -16,6 +18,17 @@ const Dashboard = () => {
             </InlineTitle>
             <InlineContainer>
               <h3 className='wallet'>{wallet.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
+            </InlineContainer>
+          </Card>
+          <Card noShadow width='90%'>
+            <InlineTitle>
+              <h2 className='h2'>Receber Pix</h2>
+            </InlineTitle>
+            <InlineContainer>
+              <Input placeholder='Valor' />
+              <Button>
+                Gerar Código
+              </Button>
             </InlineContainer>
           </Card>
         </div>

@@ -33,4 +33,12 @@ export const InlineContainer = styled.div`
     display: flex;
     margin-top: 30px;
     width: 100%;
+    div {
+        flex: 4;
+        margin-right: 20px
+    }
+
+    button {
+        flex: 1;
+    }
 `
