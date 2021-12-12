@@ -30,6 +30,18 @@ const Dashboard = () => {
                 Gerar Código
               </Button>
             </InlineContainer>
+            <p className='primary-color'>Pix Key - Come from API ##########################</p>
+          </Card>
+          <Card noShadow width='90%'>
+            <InlineTitle>
+              <h2 className='h2'>Pagar Pix</h2>
+            </InlineTitle>
+            <InlineContainer>
+              <Input placeholder='Insira a Chave Pix' />
+              <Button>
+                Pagar Pix
+              </Button>
+            </InlineContainer>
           </Card>
         </div>
         <div>
