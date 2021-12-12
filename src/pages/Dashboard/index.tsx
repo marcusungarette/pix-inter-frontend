@@ -1,4 +1,4 @@
-import { DashboardBackground, BodyContainer, InlineTitle } from './dashboard.styles'
+import { DashboardBackground, BodyContainer, InlineTitle, InlineContainer } from './dashboard.styles'
 
 import Header from '../../components/Header'
 import Card from 'components/Card'
@@ -14,7 +14,9 @@ const Dashboard = () => {
             <InlineTitle>
               <h2 className='h2'>Saldo atual</h2>
             </InlineTitle>
-            <h3 className='wallet'>{wallet.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
+            <InlineContainer>
+              <h3 className='wallet'>{wallet.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
+            </InlineContainer>
           </Card>
         </div>
         <div>

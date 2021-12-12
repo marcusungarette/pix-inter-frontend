@@ -29,3 +29,8 @@ export const InlineTitle = styled.div`
     display: flex;
     width: 100%;
 `
+export const InlineContainer = styled.div`
+    display: flex;
+    margin-top: 30px;
+    width: 100%;
+`
