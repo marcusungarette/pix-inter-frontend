@@ -14,6 +14,7 @@ interface StatementItemInterface {
 }
 
 const StatementItem = ({ user, value, type, updatedAt }: StatementItemInterface) => {
+  const PayedOrReceived = type === 'pay' ? 'Pago a ' : 'Recebido de'
   return (
     <StatementItemContainer>
       <StatementItemImage type={type}>
@@ -23,7 +24,7 @@ const StatementItem = ({ user, value, type, updatedAt }: StatementItemInterface)
         <p className='primary-color'>
           {value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
         </p>
-        <p className=''>{type === 'pay' ? 'Pago a ' : 'Recebido de'} <strong>{user.firstName} {user.lastName}</strong></p>
+        <p className=''>{PayedOrReceived.toUpperCase()} <strong>{user.firstName.toUpperCase()} {user.lastName.toUpperCase()}</strong></p>
         <p className=''>{format(updatedAt, "dd/MM/yyyy 'às' HH:mm'h'")}</p>
       </StatementItemInfo>
     </StatementItemContainer>
