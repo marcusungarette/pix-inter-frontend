@@ -1,5 +1,6 @@
-import { StatementItemContainer, StatementItemInfo, StatementContainer } from './statement.styles'
+import { StatementItemContainer, StatementItemInfo, StatementContainer, StatementItemImage } from './statement.styles'
 
+import { FiDollarSign } from 'react-icons/fi'
 import { format } from 'date-fns'
 
 interface StatementItemInterface {
@@ -15,6 +16,9 @@ interface StatementItemInterface {
 const StatementItem = ({ user, value, type, updatedAt }: StatementItemInterface) => {
   return (
     <StatementItemContainer>
+      <StatementItemImage type={type}>
+        <FiDollarSign size={24} />
+      </StatementItemImage>
       <StatementItemInfo>
         <p className='primary-color'>
           {value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
