@@ -7,12 +7,12 @@ import GlobalStyle from './styles/global'
 
 function App () {
   return (
-    <AuthProvider>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <AuthProvider>
         <GlobalStyle />
         <Router />
-      </ThemeProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </ThemeProvider>
   )
 }
 
