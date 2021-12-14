@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from 'react'
 
-import { signIn, signUp, SignInData, SignUpData } from '../services/resources/user'
+import { signIn, signUp, SignInData, SignUpData, me } from '../services/resources/user'
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -29,12 +29,29 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const userSignIn = async (userData: SignInData) => {
     const { data } = await signIn(userData)
-    localStorage.setItem('@Inter:token', data.acessToken)
+
+    if (data?.status === 'error') {
+      return data
+    }
+
+    if (data.acessToken) {
+      localStorage.setItem('@Inter:token', data.acessToken)
+    }
+
+    await getCurrentUser()
+  }
+
+  const getCurrentUser = async () => {
+    const { data } = await me()
+    setUser(data)
+    return data
   }
 
   const userSignUp = async (userData: SignUpData) => {
     const { data } = await signUp(userData)
     localStorage.setItem('@Inter:token', data.acessToken)
+
+    await getCurrentUser()
   }
 
   return (
