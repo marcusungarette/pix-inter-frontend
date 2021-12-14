@@ -23,13 +23,13 @@ export interface UserDTO {
 }
 
 export const signIn = async (data: SignInData) => {
-  return await api.post('/user/signin', data)
+  return api.post('/user/signin', data)
 }
 
 export const me = async () => {
-  return await api.get<UserDTO>('/user/signup')
+  return api.get<UserDTO>('/user/me')
 }
 
 export const signUp = async (data: SignUpData) => {
-  return await api.post('/user/signup', data)
+  return api.post('/user/signup', data)
 }

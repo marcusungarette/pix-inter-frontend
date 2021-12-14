@@ -1,33 +1,34 @@
-import { AxiosResponse } from 'axios'
-import { createContext, ReactNode, useState } from 'react'
-
-import { signIn, signUp, SignInData, SignUpData, me } from '../services/resources/user'
-
-interface AuthProviderProps {
-  children: ReactNode;
-}
+import { createContext, useState } from 'react'
+import { signIn, SignInData, signUp, SignUpData, me } from '../services/resources/user'
 
 interface UserDTO {
-  id: string;
-  firstName: string;
-  lastName: string;
-  accountNumber: number;
-  accountDigit: number;
-  wallet: number;
-  email: string;
+    id: string;
+    firstName: string;
+    lastName: string;
+    accountNumber: number;
+    accountDigit: number;
+    wallet: number;
+    email: string;
 }
 
 interface ContextData {
- user: UserDTO
- userSignIn: (userData: SignInData) => Promise<UserDTO>
- userSignUp: (userData: SignUpData) => Promise<UserDTO>
- me: () => Promise<AxiosResponse<UserDTO, any>>
+    user: UserDTO
+    userSignIn: (userData: SignInData) => Promise<UserDTO>
+    userSignUp: (userData: SignUpData) => Promise<UserDTO>
+    getCurrentUser: () => Promise<UserDTO>
 }
 
 export const AuthContext = createContext<ContextData>({} as ContextData)
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<UserDTO>({} as UserDTO)
+// eslint-disable-next-line no-undef
+export const AuthProvider: React.FC = ({ children }: any) => {
+  const [user, setUser] = useState<UserDTO>(() => {
+    const user = localStorage.getItem('@Inter:User')
+
+    if (user) {
+      return JSON.parse(user)
+    }
+  })
 
   const userSignIn = async (userData: SignInData) => {
     const { data } = await signIn(userData)
@@ -36,8 +37,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       return data
     }
 
-    if (data.acessToken) {
-      localStorage.setItem('@Inter:token', data.acessToken)
+    if (data.accessToken) {
+      localStorage.setItem('@Inter:Token', data.accessToken)
     }
 
     return getCurrentUser()
@@ -46,19 +47,24 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const getCurrentUser = async () => {
     const { data } = await me()
     setUser(data)
-    return data
+    localStorage.setItem('@Inter:User', JSON.stringify(user))
+    return data as UserDTO
   }
 
   const userSignUp = async (userData: SignUpData) => {
     const { data } = await signUp(userData)
-    localStorage.setItem('@Inter:token', data.acessToken)
+
+    if (data.accessToken) {
+      localStorage.setItem('@Inter:Token', data.accessToken)
+    }
 
     return getCurrentUser()
   }
 
   return (
-    <AuthContext.Provider value={{ user, userSignIn, userSignUp, me }}>
+    <AuthContext.Provider value={{ user, userSignIn, userSignUp, getCurrentUser }}>
       {children}
+
     </AuthContext.Provider>
   )
 }
