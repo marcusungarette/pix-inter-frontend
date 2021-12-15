@@ -10,12 +10,12 @@ interface StatementItemInterface {
       lastName: string
   },
   value: number,
-  type: 'pay' | 'received',
+  type: 'paid' | 'received',
   updatedAt: Date
 }
 
 const StatementItem = ({ user, value, type, updatedAt }: StatementItemInterface) => {
-  const PayedOrReceived = type === 'pay' ? 'Pago a ' : 'Recebido de'
+  const PayedOrReceived = type === 'paid' ? 'Pago a ' : 'Recebido de'
   return (
     <StatementItemContainer>
       <StatementItemImage type={type}>
@@ -37,7 +37,6 @@ const Statement = () => {
 
   const getAllTransactions = async () => {
     const { data } = await transactions()
-    console.log(statements)
     setStatements(data.transactions)
   }
 
