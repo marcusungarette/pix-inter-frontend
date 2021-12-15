@@ -5,7 +5,7 @@ import Header from '../../components/Header'
 import Card from 'components/Card'
 import Input from 'components/Input'
 import Button from 'components/Button'
-import { request } from '../../services/resources/pix'
+import { request, pay } from '../../services/resources/pix'
 
 import Statement from './Statement'
 
@@ -25,8 +25,17 @@ const Dashboard = () => {
     }
   }
 
-  const handlePayPix = () => {
-    //
+  const handlePayPix = async () => {
+    try {
+      const { data } = await pay(key)
+
+      if (data.msg) {
+        alert(data.msg)
+      }
+    } catch (error) {
+      console.log(error)
+      alert('Não é possivel receber ou pagar o seu PIX')
+    }
   }
 
   useEffect(() => {
