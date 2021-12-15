@@ -28,6 +28,8 @@ export const AuthProvider: React.FC = ({ children }: any) => {
     if (user) {
       return JSON.parse(user)
     }
+
+    return {} as UserDTO
   })
 
   const userSignIn = async (userData: SignInData) => {

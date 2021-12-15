@@ -1,5 +1,6 @@
+import { useState, useEffect } from 'react'
 import { StatementItemContainer, StatementItemInfo, StatementContainer, StatementItemImage } from './statement.styles'
-
+import { transactions } from '../../../services/resources/pix'
 import { FiDollarSign } from 'react-icons/fi'
 import { format } from 'date-fns'
 
@@ -25,36 +26,29 @@ const StatementItem = ({ user, value, type, updatedAt }: StatementItemInterface)
           {value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
         </p>
         <p className=''>{PayedOrReceived.toUpperCase()} <strong>{user.firstName.toUpperCase()} {user.lastName.toUpperCase()}</strong></p>
-        <p className=''>{format(updatedAt, "dd/MM/yyyy 'às' HH:mm'h'")}</p>
+        <p className=''>{format(new Date(updatedAt), "dd/MM/yyyy 'às' HH:mm'h'")}</p>
       </StatementItemInfo>
     </StatementItemContainer>
   )
 }
 
 const Statement = () => {
-  const statements: StatementItemInterface[] = [
-    {
-      user: {
-        firstName: 'Pablo',
-        lastName: 'Henrique',
-      },
-      value: 250.00,
-      type: 'pay',
-      updatedAt: new Date(),
-    },
-    {
-      user: {
-        firstName: 'José',
-        lastName: 'Santos',
-      },
-      value: 270.00,
-      type: 'received',
-      updatedAt: new Date(),
-    },
-  ]
+  const [statements, setStatements] = useState<StatementItemInterface[]>([])
+
+  const getAllTransactions = async () => {
+    const { data } = await transactions()
+    console.log(statements)
+    setStatements(data.transactions)
+  }
+
+  useEffect(() => {
+    getAllTransactions()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <StatementContainer>
-      {statements.map((statement, i) => <StatementItem {...statement} key={i} />)}
+      {statements.length > 0 && statements.map((statement) => <StatementItem {...statement} key={statement.value} />)}
     </StatementContainer>
   )
 }

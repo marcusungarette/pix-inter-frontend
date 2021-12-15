@@ -1,5 +1,6 @@
+import { useEffect } from 'react'
 import { DashboardBackground, BodyContainer, InlineTitle, InlineContainer } from './dashboard.styles'
-
+import useAuth from 'hooks/useAuth'
 import Header from '../../components/Header'
 import Card from 'components/Card'
 import Input from 'components/Input'
@@ -7,7 +8,18 @@ import Button from 'components/Button'
 import Statement from './Statement'
 
 const Dashboard = () => {
-  const wallet = 5000
+  const { user, getCurrentUser } = useAuth()
+  const wallet = user?.wallet || 0
+
+  useEffect(() => {
+    getCurrentUser()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  if (!user) {
+    return null
+  }
+
   return (
     <DashboardBackground>
       <Header />
